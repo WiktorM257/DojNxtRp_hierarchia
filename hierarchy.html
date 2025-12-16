@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rada Departamentu | Department of Justice</title>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="components.css">
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="mobile.css">
+    <link rel="icon" type="image/png" href="dojlogog.png">
+</head>
+<body>
+
+<nav id="navbar" role="navigation" aria-label="Główna nawigacja">
+    <div class="nav-container">
+        <a href="index.html" class="logo">
+            <i class="fas fa-balance-scale"></i> DOJ
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="index.html">Strona Główna</a></li>
+
+            <li class="has-submenu">
+                <a href="#">
+                    Struktura <i class="fas fa-chevron-down"></i>
+                </a>
+                <ul class="submenu">
+                    <li><a href="rada.html">Rada Departamentu</a></li>
+                    <li><a href="hierarchy.html">Hierarchia służbowa</a></li>
+                </ul>
+            </li>
+
+            <li><a href="documents.html">Dokumenty</a></li>
+            <li><a href="recruitment.html">Rekrutacja</a></li>
+        </ul>
+    </div>
+    
+    <!-- DODAJ TEN PRZYCISK -->
+    <button id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <a href="index.html">Strona Główna</a>
+    <a href="rada.html">Rada Departamentu</a>
+    <a href="hierarchy.html">Hierarchia służbowa</a>
+    <a href="documents.html">Dokumenty</a>
+    <a href="recruitment.html">Rekrutacja</a>
+</div>
+
+
+<main id="maincontent">
+    <section class="page-section">
+        <div class="section-header fade-in">
+            <h2>Rada Departamentu</h2>
+            <p>Organ decyzyjny Department of Justice</p>
+        </div>
+
+        <div class="image-wrapper fade-in">
+            <!-- PODMIEŃ NA SWOJĄ GRAFIKĘ -->
+            <img src="hierarchia.png" alt="Rada Departamentu DOJ">
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h4>Department of Justice</h4>
+            <p>Oficjalna strona Departamentu Sprawiedliwośc<br>NXTRP 2.0</p>
+        </div>
+        <div class="footer-section">
+        <h4>Szybkie linki</h4>
+        <a href="index.html">Strona główna</a>
+        <a href="documents.html">Dokumenty</a>
+        <a href="rada.html">Rada Departamentu</a>
+        <a href="hierarchy.html">Hierarchia służbowa</a>
+        <a href="recruitment.html">Rekrutacja</a>
+</div>
+
+        <div class="footer-section">
+            <h4>Kontakt</h4>
+           <a href="https://discord.gg/rDNfymcqYW" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i> Aplikacja Departamentu </a>
+                <a href="https://discord.gg/h5h69dvCpX" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i>  NXTRP 2.0 </a>
+         
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2025 NXTRP 2.0 - DOJ. Wszelkie prawa zastrzeżone.</p>
+    </div>
+</footer>
+
+<script>
+    (function() {
+        const navLinks = document.querySelectorAll('.nav-links a');
+        const current = location.pathname.split('/').pop() || 'index.html';
+        navLinks.forEach(a => {
+            const href = a.getAttribute('href');
+            if (href === current) {
+                a.classList.add('active');
+                a.setAttribute('aria-current', 'page');
+            }
+        });
+
+        document.querySelectorAll('.btn-doc').forEach(btn => {
+            if (!btn.hasAttribute('aria-label')) {
+                btn.setAttribute('aria-label', btn.textContent.trim());
+            }
+        });
+
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        if (hamburger && mobileMenu) {
+            hamburger.setAttribute('aria-expanded', 'false');
+            
+            hamburger.addEventListener('click', () => {
+                const open = mobileMenu.classList.toggle('open');
+                hamburger.classList.toggle('open', open);
+                hamburger.setAttribute('aria-expanded', String(open));
+                mobileMenu.setAttribute('aria-hidden', String(!open));
+            });
+            
+            mobileMenu.querySelectorAll('a').forEach(a => {
+                a.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    hamburger.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                });
+            });
+            
+            document.addEventListener('keydown', (ev) => {
+                if (ev.key === 'Escape' && mobileMenu.classList.contains('open')) {
+                    mobileMenu.classList.remove('open');
+                    hamburger.classList.remove('open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    mobileMenu.setAttribute('aria-hidden', 'true');
+                }
+            });
+        }
+    })();
+</script>
+
+<script src="core.js"></script>
+</body>
+</html>
